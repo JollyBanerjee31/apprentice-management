@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/stipend-slips",
+      "schedule": "0 3 1 * *"
+    },
+    {
+      "path": "/api/cron/payroll-file",
+      "schedule": "0 3 20 * *"
+    }
+  ]
+}

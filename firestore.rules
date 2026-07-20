@@ -1,0 +1,25 @@
+rules_version = '2';
+
+// This app reads/writes Firestore exclusively through the Admin SDK
+// (src/lib/firebase-admin.ts) from trusted server-side code — the Admin SDK
+// bypasses these rules entirely. Authentication and role checks happen at
+// the NextAuth/API-route layer (src/lib/api-auth.ts), not here.
+//
+// The client Firebase SDK (src/lib/firebase.ts) is exported but this app
+// never calls Firebase Client Auth (signIn happens through NextAuth+Google
+// directly), so `request.auth` is always null for any direct client
+// request — meaning these rules correctly deny all direct client access by
+// default. They exist as defense-in-depth for if that ever changes.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+        && request.auth.token.email ==
+           get(/databases/$(database)/documents/users/$(request.auth.uid)).data.email;
+    }
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
