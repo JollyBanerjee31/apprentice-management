@@ -70,8 +70,7 @@ export function ExtraLeaveForm({ perDay }: ExtraLeaveFormProps) {
       className="flex flex-col gap-4 rounded-lg border border-border bg-card p-5"
     >
       <div className="rounded-md border border-[var(--orange)]/30 bg-[var(--orange-lt)] px-4 py-3 text-sm text-[var(--orange-dk)]">
-        This leave will be Loss of Pay. Your stipend will be deducted at{" "}
-        <span className="font-mono font-semibold">{formatCurrency(perDay)}</span>/day.
+        This leave will be Loss of Pay.
       </div>
 
       {formError && (
@@ -115,7 +114,7 @@ export function ExtraLeaveForm({ perDay }: ExtraLeaveFormProps) {
         <Input id="noOfDays" value={noOfDays} readOnly disabled className="bg-background" />
       </div>
 
-      {noOfDays > 0 && (
+      {/* {noOfDays > 0 && (
         <p className="text-sm text-muted-foreground">
           Estimated deduction:{" "}
           <span className="font-mono font-semibold text-[var(--danger)]">
@@ -123,7 +122,7 @@ export function ExtraLeaveForm({ perDay }: ExtraLeaveFormProps) {
           </span>{" "}
           ({noOfDays} × {formatCurrency(perDay)}/day)
         </p>
-      )}
+      )} */}
 
       <div className="flex gap-3">
         <Button type="submit" variant="orange" disabled={submitting || noOfDays <= 0}>

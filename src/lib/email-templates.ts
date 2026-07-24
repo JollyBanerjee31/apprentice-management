@@ -190,7 +190,7 @@ export function extraLeaveSubmittedApprentice(
       ["Dates", `${formatDate(startDate)} – ${formatDate(endDate)}`],
       ["Days", String(noOfDays)],
       ["Request ID", requestId],
-      ["Estimated Deduction", formatCurrency(estimatedDeduction)],
+      // ["Estimated Deduction", formatCurrency(estimatedDeduction)],
     ])}
     <p style="margin:0;color:#5a607a;font-size:13px;">We'll email you as soon as a decision is made.</p>
   `);
@@ -231,8 +231,8 @@ export function extraLeaveDecisionApprentice(
     decision === "approved"
       ? infoTable([
           ["LOP Days", String(lopDays)],
-          ["Deduction", formatCurrency(deduction)],
-          ["Revised Final Payment", formatCurrency(finalPayment)],
+          // ["Deduction", formatCurrency(deduction)],
+          // ["Revised Final Payment", formatCurrency(finalPayment)],
         ])
       : "";
   return emailWrapper(`

@@ -4,6 +4,8 @@ import { signIn } from "next-auth/react";
 import { CalendarDays, Clock, Lock, User, Users } from "lucide-react";
 import { AkamaiLogo } from "@/components/shared/akamai-logo";
 
+const HR_TICKET_LINK   = "https://akamaisdprod.service-now.com/esc?id=sc_cat_item&sys_id=5aac5a3447e54250de05e47f316d4341"
+
 function GoogleIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
@@ -110,7 +112,7 @@ export default function LoginPage() {
           <div className="flex flex-nowrap items-center justify-center gap-4 whitespace-nowrap text-[13px] text-[#9299b0]">
             <span>
               Need help? Contact{" "}
-              <a href="#" className="text-[var(--orange)] hover:underline">
+              <a href={HR_TICKET_LINK} target="_blank" rel="noopener noreferrer" className="text-[var(--orange)] hover:underline">
                 HR Service Desk
               </a>
             </span>

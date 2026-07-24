@@ -1,38 +1,16 @@
-// import * as dotenv from 'dotenv'
-// import * as path from 'path'
-
-// // Load env vars first — before anything else
-// dotenv.config({ path: path.resolve(process.cwd(), '.env.local') })
-// // Debug — remove after fixing
-// console.log('KEY LENGTH:', process.env.FIREBASE_PRIVATE_KEY?.length)
-// console.log('KEY START:', process.env.FIREBASE_PRIVATE_KEY?.substring(0, 50))
-
-// // Initialize Firebase Admin inline — not via the shared lib
-// import { initializeApp, getApps, cert } from 'firebase-admin/app'
-// import { getFirestore } from 'firebase-admin/firestore'
-
-// const app = getApps().length === 0
-//   ? initializeApp({
-//       credential: cert({
-//         projectId:   process.env.FIREBASE_PROJECT_ID!,
-//         clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-//         privateKey:  process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-//       }),
-//     })
-//   : getApps()[0]
-
-// const adminDb = getFirestore(app)
-
-// import type { AppUser, Holiday } from "../src/types/index"
-import { adminDb } from "../src/lib/firebase-admin";
+import { config } from "dotenv";
 import type { AppUser, Holiday } from "../src/types/index";
+
+config({ path: ".env.local" });
 
 // Fill in with real Gmail addresses before running
 const HR_EMAIL         = "jobanerj@akamai.com"
 const MANAGER_EMAIL    = "jollyban1996@gmail.com"
 const APPRENTICE_EMAIL = "banerjeejolly0196@gmail.com"
+const HR_TICKET_LINK   = "https://akamaisdprod.service-now.com/esc?id=sc_cat_item&sys_id=5aac5a3447e54250de05e47f316d4341"
 
 async function seed() {
+  const { adminDb } = await import("../src/lib/firebase-admin");
   for (const email of [HR_EMAIL, MANAGER_EMAIL, APPRENTICE_EMAIL]) {
     if (email.startsWith("REPLACE_WITH_")) {
       throw new Error(
@@ -96,7 +74,7 @@ async function seed() {
   const systemConfigCol = adminDb.collection("systemConfig");
   await systemConfigCol.doc("hrName").set({ value: "HR Admin" });
   await systemConfigCol.doc("hrEmail").set({ value: HR_EMAIL });
-  await systemConfigCol.doc("hrTicketLink").set({ value: "https://support.akamai.com" });
+  await systemConfigCol.doc("hrTicketLink").set({ value: HR_TICKET_LINK });
   console.log("Created systemConfig");
 
   console.log("\nSeed complete.");

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx --env-file=.env.local scripts/seed.ts",
+    "clean-db": "tsx --env-file=.env.local scripts/clean-db.ts",
     "test:flows": "NODE_OPTIONS=--conditions=react-server tsx --env-file=.env.local scripts/test-flows.ts"
   },
   "dependencies": {
