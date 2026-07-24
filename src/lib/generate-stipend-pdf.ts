@@ -66,7 +66,7 @@ export async function generateStipendSlipPdf(input: StipendSlipPdfInput): Promis
   const contentWidth = pageWidth - marginX * 2;
 
   // ── Letterhead: Akamai logo + title ──────────────────────────────
-  const logoBuffer = fs.readFileSync(path.join(process.cwd(), "public", "akamai-logo-pdf.png"));
+  const logoBuffer = fs.readFileSync(path.join(process.cwd(), "public", "akamai-logo-new.png"));
   const logoTargetWidth = 90;
   const logoHeight = (LOGO_INTRINSIC_HEIGHT / LOGO_INTRINSIC_WIDTH) * logoTargetWidth;
   doc.image(logoBuffer, marginX, 45, { fit: [logoTargetWidth, logoHeight] });
@@ -76,7 +76,6 @@ export async function generateStipendSlipPdf(input: StipendSlipPdfInput): Promis
     .font("Helvetica-Bold")
     .fontSize(18)
     .fillColor(COLORS.text3)
-    .text("Apprentice Leave System", marginX, titleY);
   doc
     .font("Helvetica")
     .fontSize(11)
@@ -237,7 +236,7 @@ export async function generateStipendSlipPdf(input: StipendSlipPdfInput): Promis
     .fontSize(8)
     .fillColor(COLORS.text3)
     .text(
-      "This is a system-generated stipend slip. Apprentice Leave System.",
+      "This is a system-generated stipend slip. For any discrepancies, please reach out to the HR Team.",
       marginX,
       cardBottom + 24,
       { width: contentWidth, align: "center" },
